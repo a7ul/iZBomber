@@ -11,20 +11,28 @@ public class PlayerNetworking : MonoBehaviour
     [SerializeField]
     private MonoBehaviour[] scriptsToIgnore;
 
+    public string PlayerName;
 
     PhotonView photonView;
-     
+
     void Start()
     {
         photonView = GetComponent<PhotonView>();
         Initialize();
     }
 
+    void Update()
+    {
+       
+    }
+
     void Initialize()
     {
+        GetComponentInChildren<TextMesh>().text = photonView.owner.NickName;
+
         if (photonView.isMine)
         {
-
+           
         }
         else
         {
