@@ -643,8 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1900130714148104, guid: 8727ea002fdd74aeba1066d7a286e6ac, type: 2}
   lobbyCamera: {fileID: 519420028}
-  joinBtn: {fileID: 1420313857}
-  nameInput: {fileID: 922171295}
+  lobbyCanvas: {fileID: 1560359113}
 --- !u!4 &1054705960
 Transform:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class PlayerNetworking : MonoBehaviour
     private MonoBehaviour[] scriptsToIgnore;
 
     public string PlayerName;
+
     PhotonView photonView;
 
     void Start()
@@ -31,7 +32,7 @@ public class PlayerNetworking : MonoBehaviour
 
         if (photonView.isMine)
         {
-
+           
         }
         else
         {

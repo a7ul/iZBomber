@@ -11,12 +11,18 @@ public class PhotonManager : Photon.MonoBehaviour {
     [SerializeField]
     private GameObject lobbyCamera;
 
-    public Button joinBtn;
-    public InputField nameInput;
-    public string PlayerName;
+    [SerializeField]
+    private GameObject lobbyCanvas;
+
+    private Button joinBtn;
+    private InputField nameInput;
+
 
     void Start () {
         PhotonNetwork.ConnectUsingSettings("1.0");
+        joinBtn = lobbyCanvas.GetComponentInChildren<Button>();
+        nameInput = lobbyCanvas.GetComponentInChildren<InputField>();
+
         joinBtn.onClick.AddListener(HandleOnJoinClick);
     }
 
@@ -30,6 +36,7 @@ public class PhotonManager : Photon.MonoBehaviour {
     {
         PhotonNetwork.player.NickName = nameInput.text;
         lobbyCamera.SetActive(false);
+        lobbyCanvas.SetActive(false);
         PhotonNetwork.Instantiate("Player", player.transform.position, Quaternion.identity, 0); 
     }
 
