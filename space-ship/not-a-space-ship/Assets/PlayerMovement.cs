@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate() {
         if(Input.GetKey(KeyCode.A)){
             transform.Translate(-speed * Time.deltaTime, 0, 0);
         }
