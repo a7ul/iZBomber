@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     Rigidbody2D rb;
+    public float speed;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -13,15 +15,19 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if(Input.GetKey(KeyCode.A)){
-            transform.Translate(-3 * Time.deltaTime, 0, 0);
+            transform.Translate(-speed * Time.deltaTime, 0, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(3 * Time.deltaTime, 0, 0);
+            transform.Translate(speed * Time.deltaTime, 0, 0);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(Vector2.up * 4, ForceMode2D.Impulse);
+            transform.Translate(Vector2.up * speed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector2.down * speed * Time.deltaTime);
         }
     }
 }
