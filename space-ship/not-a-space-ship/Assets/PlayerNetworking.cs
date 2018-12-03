@@ -13,15 +13,24 @@ public class PlayerNetworking : MonoBehaviour
 
 
     PhotonView photonView;
-     
+    public string PlayerName;
+
     void Start()
     {
         photonView = GetComponent<PhotonView>();
         Initialize();
     }
 
+    void Update()
+    {
+        PhotonNetwork.player.NickName = PlayerName;
+        GetComponentInChildren<TextMesh>().text = PlayerName;
+    }
+
     void Initialize()
     {
+        PlayerName = "Player" + photonView.owner.ID;
+
         if (photonView.isMine)
         {
 
