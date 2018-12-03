@@ -11,9 +11,8 @@ public class PlayerNetworking : MonoBehaviour
     [SerializeField]
     private MonoBehaviour[] scriptsToIgnore;
 
-
-    PhotonView photonView;
     public string PlayerName;
+    PhotonView photonView;
 
     void Start()
     {
@@ -23,13 +22,12 @@ public class PlayerNetworking : MonoBehaviour
 
     void Update()
     {
-        PhotonNetwork.player.NickName = PlayerName;
-        GetComponentInChildren<TextMesh>().text = PlayerName;
+       
     }
 
     void Initialize()
     {
-        PlayerName = "Player" + photonView.owner.ID;
+        GetComponentInChildren<TextMesh>().text = photonView.owner.NickName;
 
         if (photonView.isMine)
         {

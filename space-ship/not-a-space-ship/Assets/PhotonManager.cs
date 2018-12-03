@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhotonManager : Photon.MonoBehaviour {
 
@@ -10,26 +11,37 @@ public class PhotonManager : Photon.MonoBehaviour {
     [SerializeField]
     private GameObject lobbyCamera;
 
+    public Button joinBtn;
+    public InputField nameInput;
+    public string PlayerName;
 
     void Start () {
         PhotonNetwork.ConnectUsingSettings("1.0");
-	}
+        joinBtn.onClick.AddListener(HandleOnJoinClick);
+    }
 
     void OnGUI()
     {
-        GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+        // GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+    }
+
+
+    void HandleOnJoinClick()
+    {
+        PhotonNetwork.player.NickName = nameInput.text;
+        lobbyCamera.SetActive(false);
+        PhotonNetwork.Instantiate("Player", player.transform.position, Quaternion.identity, 0); 
     }
 
     void OnJoinedLobby () {
         PhotonNetwork.JoinOrCreateRoom(
             "Room",
-            new RoomOptions(){ MaxPlayers = 5 },
+            new RoomOptions(){ MaxPlayers = 15 },
             TypedLobby.Default
         );
     }
 
     void OnJoinedRoom () {
-        PhotonNetwork.Instantiate("Player", player.transform.position, Quaternion.identity, 0);
-        lobbyCamera.SetActive(false); 
+
     }
 }
