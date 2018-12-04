@@ -7,6 +7,7 @@ public class Trap : Photon.MonoBehaviour {
     readonly float trapActivationTime = 1.5f;
     private LineRenderer laserLine;
     Rigidbody2D rb;
+    float bombDistance = 5f;
     PhotonView photonView;
 
     void Start()
@@ -33,7 +34,7 @@ public class Trap : Photon.MonoBehaviour {
             yield return null;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, bombDistance);
         laserLine.SetPosition(0, transform.position);
 
         if (hit.collider != null)
@@ -49,8 +50,9 @@ public class Trap : Photon.MonoBehaviour {
         }
         else
         {
-            // laserLine.SetPosition(1, new Vector2(10,10));
-            // draw maxRange?
+            StartCoroutine(BoomEffect());
+            laserLine.SetPosition(1, new Vector2(transform.position.x, transform.position.y - bombDistance));
+
         }
     }
 
