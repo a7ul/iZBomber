@@ -11,10 +11,11 @@ public class LootGenerator : Photon.MonoBehaviour
 
     public float minWait;
     public float maxWait;
-    [PunRPC]
     public float currentSpawns = 0f;
     public float spawnDuration = 10f;
     public float maxSpawn = 25f;
+
+    private object[] nullObj;
 
     private bool isSpawning;
 
@@ -25,7 +26,7 @@ public class LootGenerator : Photon.MonoBehaviour
 
     void Update()
     {
-        if (!isSpawning && PhotonNetwork.connected)
+        if (!isSpawning && PhotonNetwork.connected && PhotonNetwork.isMasterClient)
         {
             float timer = Random.Range(minWait, maxWait);
             Invoke("SpawnObject", timer);
@@ -40,12 +41,14 @@ public class LootGenerator : Photon.MonoBehaviour
             System.Random randomNumber = new System.Random();
             int randomIndex = randomNumber.Next(spawnableObjects.Count);
 
-            GameObject spawnedObject = PhotonNetwork.Instantiate(
+             GameObject spawnedObject = PhotonNetwork.InstantiateSceneObject(
                 spawnableObjects[randomIndex].name,
                 GetRandomGridPosition(),
                 Quaternion.identity,
-                0
+                0,
+                nullObj
              );
+            
             currentSpawns++;
             isSpawning = false;
          

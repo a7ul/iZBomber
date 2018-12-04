@@ -1200,6 +1200,7 @@ MonoBehaviour:
   maxWait: 1
   currentSpawns: 0
   spawnDuration: 10
+  maxSpawn: 25
 --- !u!1 &1705630477 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1254248548903656, guid: 61a39a7cad5a2403b9bd90bb532faebd,
