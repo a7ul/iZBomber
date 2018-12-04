@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61710832966505632}
   - component: {fileID: 114195031552905674}
   m_Layer: 0
-  m_Name: moneyDemo
+  m_Name: Coin
   m_TagString: money
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

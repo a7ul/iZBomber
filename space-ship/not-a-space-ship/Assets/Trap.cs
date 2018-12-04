@@ -41,11 +41,16 @@ public class Trap : Photon.MonoBehaviour {
         {
             StartCoroutine(BoomEffect());
             laserLine.SetPosition(1, hit.point);
-
-            if(hit.collider.gameObject.tag == "Player")
+            string colliderTag = hit.collider.gameObject.tag;
+            if (colliderTag  == "Player")
             {
                Inventory inventory =  hit.collider.gameObject.GetComponent<Inventory>();
-                inventory.Kill();
+               inventory.Kill();
+            }
+            else if(colliderTag == "money")
+            {
+                PhotonNetwork.Destroy(hit.collider.gameObject);
+
             }
         }
         else

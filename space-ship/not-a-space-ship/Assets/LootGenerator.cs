@@ -11,8 +11,10 @@ public class LootGenerator : Photon.MonoBehaviour
 
     public float minWait;
     public float maxWait;
+    [PunRPC]
     public float currentSpawns = 0f;
     public float spawnDuration = 10f;
+    public float maxSpawn = 25f;
 
     private bool isSpawning;
 
@@ -33,19 +35,25 @@ public class LootGenerator : Photon.MonoBehaviour
 
     void SpawnObject()
     {
-        System.Random randomNumber = new System.Random();
-        int randomIndex = randomNumber.Next(spawnableObjects.Count);
-        GameObject spawnedObject = PhotonNetwork.Instantiate(
-            spawnableObjects[randomIndex].name,
-            GetRandomGridPosition(),
-            Quaternion.identity,
-            0
-         );
+        if(currentSpawns < maxSpawn)
+        {
+            System.Random randomNumber = new System.Random();
+            int randomIndex = randomNumber.Next(spawnableObjects.Count);
 
-        isSpawning = false;
-        StartCoroutine(DeSpawn(spawnedObject));
+            GameObject spawnedObject = PhotonNetwork.Instantiate(
+                spawnableObjects[randomIndex].name,
+                GetRandomGridPosition(),
+                Quaternion.identity,
+                0
+             );
+            currentSpawns++;
+            isSpawning = false;
+         
+            StartCoroutine(DeSpawn(spawnedObject));
+
+        }
     }
-
+    
     private IEnumerator DeSpawn(GameObject spawnedObject)
     {
         float normalizedTime = 0;
@@ -54,7 +62,8 @@ public class LootGenerator : Photon.MonoBehaviour
             normalizedTime += Time.deltaTime / spawnDuration;
             yield return null;
         }
-        Destroy(spawnedObject);
+        PhotonNetwork.Destroy(spawnedObject);
+        currentSpawns--;
     }
 
     public Vector2 GetRandomGridPosition()
