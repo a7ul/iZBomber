@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerControls : Photon.MonoBehaviour {
 
     Rigidbody2D rb;
     public float speed;
 
-	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate() {
+        // Movement
         if(Input.GetKey(KeyCode.A)){
             transform.Translate(-speed * Time.deltaTime, 0, 0);
         }
@@ -28,6 +27,12 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKey(KeyCode.S))
         {
             transform.Translate(Vector2.down * speed * Time.deltaTime);
+        }
+
+        // Actions
+         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PhotonNetwork.Instantiate("Trap", transform.position, Quaternion.identity, 0); 
         }
     }
 }
