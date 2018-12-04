@@ -62,8 +62,12 @@ public class LootGenerator : Photon.MonoBehaviour
             normalizedTime += Time.deltaTime / spawnDuration;
             yield return null;
         }
-        PhotonNetwork.Destroy(spawnedObject);
-        currentSpawns--;
+        if(spawnedObject != null)
+        {
+            PhotonNetwork.Destroy(spawnedObject);
+            currentSpawns--;
+        }
+
     }
 
     public Vector2 GetRandomGridPosition()
