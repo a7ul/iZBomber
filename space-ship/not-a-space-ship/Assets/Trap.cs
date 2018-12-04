@@ -33,17 +33,13 @@ public class Trap : Photon.MonoBehaviour {
             yield return null;
         }
 
-        // Cast a ray straight up.
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
         laserLine.SetPosition(0, transform.position);
-        Debug.Log(hit.collider);
-        // If it hits something...
+
         if (hit.collider != null)
         {
-            Debug.Log("BOOM");
             StartCoroutine(BoomEffect());
             laserLine.SetPosition(1, hit.point);
-            //PhotonNetwork.Instantiate("Trap", hit.point, Quaternion.identity, 0);
         }
         else
         {
