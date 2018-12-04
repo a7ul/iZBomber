@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour {
     public Text gdprCountView;
     public Text contactLessView;
     public Text ecommView;
+    public GameObject lobbyCamera;
+    public GameObject lobbyCanvas;
 
 
     // Use this for initialization
@@ -33,6 +35,11 @@ public class GameController : MonoBehaviour {
     public void SetEcommCount(float count)
     {
         ecommView.text = "Ecomm: " + count;
+    }
+    public void SetLobbyActive(bool active)
+    {
+        lobbyCamera.SetActive(active);
+        lobbyCanvas.SetActive(active);
     }
 
     // Update is called once per frame

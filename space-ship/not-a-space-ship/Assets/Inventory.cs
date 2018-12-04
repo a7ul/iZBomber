@@ -28,11 +28,10 @@ public class Inventory : Photon.MonoBehaviour {
         SetValues();
     }
 
-    [PunRPC]
-    public void TakeDamage(float damage)
+     public void Kill()
     {
-        money -= damage;
-        SetValues();
+        PhotonNetwork.Destroy(gameObject);
+        gc.SetLobbyActive(true);
     }
 
     [PunRPC]

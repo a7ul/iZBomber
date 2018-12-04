@@ -34,10 +34,13 @@ public class PhotonManager : Photon.MonoBehaviour {
 
     void HandleOnJoinClick()
     {
-        PhotonNetwork.player.NickName = nameInput.text;
-        lobbyCamera.SetActive(false);
-        lobbyCanvas.SetActive(false);
-        PhotonNetwork.Instantiate("Player", player.transform.position, Quaternion.identity, 0); 
+        if (PhotonNetwork.connected)
+        {
+            PhotonNetwork.player.NickName = nameInput.text;
+            lobbyCamera.SetActive(false);
+            lobbyCanvas.SetActive(false);
+            PhotonNetwork.Instantiate("Player", player.transform.position, Quaternion.identity, 0);
+        }
     }
 
     void OnJoinedLobby () {
