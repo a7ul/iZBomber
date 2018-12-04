@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
     public Text ecommView;
     public GameObject lobbyCamera;
     public GameObject lobbyCanvas;
+    public GameObject InGameCanvas;
 
 
     // Use this for initialization
@@ -40,6 +41,7 @@ public class GameController : MonoBehaviour {
     {
         lobbyCamera.SetActive(active);
         lobbyCanvas.SetActive(active);
+        InGameCanvas.SetActive(!active);
     }
 
     // Update is called once per frame

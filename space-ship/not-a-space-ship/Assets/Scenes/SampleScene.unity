@@ -567,8 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1900130714148104, guid: 8727ea002fdd74aeba1066d7a286e6ac, type: 2}
-  lobbyCamera: {fileID: 519420028}
-  lobbyCanvas: {fileID: 1560359113}
+  gameController: {fileID: 1669334089}
 --- !u!4 &1054705960
 Transform:
   m_ObjectHideFlags: 0
@@ -1169,6 +1168,7 @@ MonoBehaviour:
   ecommView: {fileID: 1480985776}
   lobbyCamera: {fileID: 519420028}
   lobbyCanvas: {fileID: 1560359113}
+  InGameCanvas: {fileID: 2010647875}
 --- !u!4 &1669334090
 Transform:
   m_ObjectHideFlags: 0
@@ -1424,7 +1424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2010647876
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -40,6 +40,12 @@ public class Trap : Photon.MonoBehaviour {
         {
             StartCoroutine(BoomEffect());
             laserLine.SetPosition(1, hit.point);
+
+            if(hit.collider.gameObject.tag == "Player")
+            {
+               Inventory inventory =  hit.collider.gameObject.GetComponent<Inventory>();
+                inventory.Kill();
+            }
         }
         else
         {
