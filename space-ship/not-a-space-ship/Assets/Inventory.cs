@@ -30,8 +30,11 @@ public class Inventory : Photon.MonoBehaviour {
 
      public void Kill()
     {
-        PhotonNetwork.Destroy(gameObject);
-        gc.SetLobbyActive(true);
+        if (GetComponent<PhotonView>().isMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
+             gc.SetLobbyActive(true);
+        }
     }
 
     [PunRPC]
