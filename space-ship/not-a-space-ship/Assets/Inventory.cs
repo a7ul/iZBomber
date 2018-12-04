@@ -36,7 +36,7 @@ public class Inventory : Photon.MonoBehaviour {
     }
 
     [PunRPC]
-    public void collectMoney(float amount)
+    public void CollectMoney(float amount)
     {
         money += amount;
         SetValues();

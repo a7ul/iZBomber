@@ -14,18 +14,19 @@ public class Collector : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "trap")
+        if (other.gameObject.tag == "trap")
         {
             Destroy(other.gameObject);
             inventory.TakeDamage(5); //TODO get it from other object
             return;
         }
-        if(other.tag == "money")
+        if (other.gameObject.tag == "money")
         {
             Destroy(other.gameObject);
-            inventory.collectMoney(10); //TODO get it from other object
+            inventory.CollectMoney(10); //TODO get it from other object
         }
     }
+
 }
