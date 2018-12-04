@@ -7,11 +7,13 @@ public class Trap : Photon.MonoBehaviour {
     readonly float trapActivationTime = 1.5f;
     private LineRenderer laserLine;
     Rigidbody2D rb;
+    PhotonView photonView;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         laserLine = GetComponent<LineRenderer>();
+        photonView = GetComponent<PhotonView>();
 
         StartCoroutine(ActivateTrap());
     }
@@ -57,6 +59,9 @@ public class Trap : Photon.MonoBehaviour {
         yield return shotDuration;
 
         laserLine.enabled = false;
-        PhotonNetwork.Destroy(gameObject);
+        if (photonView.isMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 }
