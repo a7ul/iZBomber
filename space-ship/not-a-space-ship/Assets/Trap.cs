@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class Trap : Photon.MonoBehaviour {
 
-    public float floatHeight;
-    public float liftForce;
-    public float damping;
-
     private readonly WaitForSeconds shotDuration = new WaitForSeconds(.07f);
     readonly float trapActivationTime = 1.5f;
     private LineRenderer laserLine;
