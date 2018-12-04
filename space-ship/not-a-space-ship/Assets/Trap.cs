@@ -1,20 +1,21 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : MonoBehaviour {
+public class Trap : Photon.MonoBehaviour {
 
-    public float floatHeight;     // Desired floating height.
-    public float liftForce;       // Force to apply when lifting the rigidbody.
-    public float damping;         // Force reduction proportional to speed (reduces bouncing).
+    public float floatHeight;
+    public float liftForce;
+    public float damping;
 
-    readonly float trapActivationTime = 3f;
-
+    private readonly WaitForSeconds shotDuration = new WaitForSeconds(.07f);
+    readonly float trapActivationTime = 1.5f;
+    private LineRenderer laserLine;
     Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        laserLine = GetComponent<LineRenderer>();
 
         StartCoroutine(ActivateTrap());
     }
@@ -26,6 +27,7 @@ public class Trap : MonoBehaviour {
 
     private IEnumerator ActivateTrap()
     {
+
         float normalizedTime = 0;
         while (normalizedTime <= 1f)
         {
@@ -35,18 +37,30 @@ public class Trap : MonoBehaviour {
 
         // Cast a ray straight up.
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
+        laserLine.SetPosition(0, transform.position);
         Debug.Log(hit.collider);
         // If it hits something...
         if (hit.collider != null)
         {
             Debug.Log("BOOM");
-
-            float distance = Mathf.Abs(hit.point.y - transform.position.y);
-            float heightError = floatHeight - distance;
-
-            float force = liftForce * heightError - rb.velocity.y * damping;
-
-            rb.AddForce(Vector3.up * force);
+            StartCoroutine(BoomEffect());
+            laserLine.SetPosition(1, hit.point);
+            //PhotonNetwork.Instantiate("Trap", hit.point, Quaternion.identity, 0);
         }
+        else
+        {
+            // laserLine.SetPosition(1, new Vector2(10,10));
+            // draw maxRange?
+        }
+    }
+
+    private IEnumerator BoomEffect()
+    {
+        laserLine.enabled = true;
+
+        yield return shotDuration;
+
+        laserLine.enabled = false;
+        PhotonNetwork.Destroy(gameObject);
     }
 }
