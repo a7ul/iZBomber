@@ -39,4 +39,5 @@ MonoBehaviour:
   - collectMoney
   - TakeDamage
   - CollectMoney
+  - PublishGlobalMessage
   DisableAutoOpenWizard: 1

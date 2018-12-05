@@ -37,11 +37,18 @@ public class GameController : MonoBehaviour {
     {
         ecommView.text = "Ecomm: " + count;
     }
+
     public void SetLobbyActive(bool active)
     {
         lobbyCamera.SetActive(active);
         lobbyCanvas.SetActive(active);
         InGameCanvas.SetActive(!active);
+    }
+
+    [PunRPC]
+    public void PublishGlobalMessage(string msg)
+    {
+        Debug.Log(msg);
     }
 
     // Update is called once per frame

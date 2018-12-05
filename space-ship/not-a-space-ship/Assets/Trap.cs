@@ -10,17 +10,19 @@ class CustomLineRenderer
 
 public class Trap : Photon.MonoBehaviour
 {
-
+    private Rigidbody2D rb;
+    private GameController gc;
+    private PhotonView photonView;
     private readonly WaitForSeconds shotDuration = new WaitForSeconds(.07f);
+
     readonly float trapActivationTime = 1.5f;
-    Rigidbody2D rb;
-    float bombDistance = 5f;
-    PhotonView photonView;
+    readonly float bombDistance = 5f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         photonView = GetComponent<PhotonView>();
+        gc = FindObjectOfType<GameController>();
 
         StartCoroutine(ActivateTrap());
     }
@@ -83,6 +85,11 @@ public class Trap : Photon.MonoBehaviour
                 if (colliderTag == "Player")
                 {
                     Inventory inventory = hit.collider.gameObject.GetComponent<Inventory>();
+                    if (photonView.isMine)
+                    {
+                        var myName = hit.collider.gameObject.GetComponent<PhotonView>().owner.NickName;
+                        gc.PublishGlobalMessage(PhotonNetwork.player.NickName + " eliminated " + myName);
+                    }
                     inventory.Kill();
                 }
                 else if (colliderTag == "money")
