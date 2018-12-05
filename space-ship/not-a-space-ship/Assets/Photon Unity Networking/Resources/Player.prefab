@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 61337047097769330}
   - component: {fileID: 114792957943183810}
   - component: {fileID: 114788207288081866}
+  - component: {fileID: 95622774685588498}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -221,7 +222,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 3, y: 3}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -237,6 +238,24 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1645366930789794}
   m_Enabled: 1
+--- !u!95 &95622774685588498
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1900130714148104}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 625f0cbcbdea241f8af7afc12d85f3cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!102 &102260197640848390
 TextMesh:
   serializedVersion: 3
@@ -449,8 +468,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1f51a5d73376e4a0e8efd798f6e4e377, type: 3}
-  m_Color: {r: 0.07929869, g: 0.38626823, b: 0.509434, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 480747f034959481db9fa6c58139b106, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
