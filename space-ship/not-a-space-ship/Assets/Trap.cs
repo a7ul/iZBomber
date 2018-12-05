@@ -43,10 +43,10 @@ public class Trap : Photon.MonoBehaviour
         }
 
         List<RaycastHit2D> hits = new List<RaycastHit2D>(new RaycastHit2D[] {
-            Physics2D.Raycast(transform.position, Vector2.up, bombDistance),
-            Physics2D.Raycast(transform.position, Vector2.right, bombDistance),
-            Physics2D.Raycast(transform.position, Vector2.down, bombDistance),
-            Physics2D.Raycast(transform.position, Vector2.left, bombDistance),
+            Physics2D.CircleCast(transform.position, 0.5f, Vector2.up, bombDistance),
+            Physics2D.CircleCast(transform.position, 0.5f, Vector2.right, bombDistance),
+            Physics2D.CircleCast(transform.position, 0.5f, Vector2.down, bombDistance),
+            Physics2D.CircleCast(transform.position, 0.5f, Vector2.left, bombDistance),
         });
 
         List<CustomLineRenderer> laserLines = new List<CustomLineRenderer>
