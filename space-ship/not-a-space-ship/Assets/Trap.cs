@@ -1,11 +1,18 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : Photon.MonoBehaviour {
+class CustomLineRenderer
+{
+    public LineRenderer Line { get; set; }
+    public Vector2 Direction { get; set; }
+}
+
+public class Trap : Photon.MonoBehaviour
+{
 
     private readonly WaitForSeconds shotDuration = new WaitForSeconds(.07f);
     readonly float trapActivationTime = 1.5f;
-    private LineRenderer laserLine;
     Rigidbody2D rb;
     float bombDistance = 5f;
     PhotonView photonView;
@@ -13,7 +20,6 @@ public class Trap : Photon.MonoBehaviour {
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        laserLine = GetComponent<LineRenderer>();
         photonView = GetComponent<PhotonView>();
 
         StartCoroutine(ActivateTrap());
@@ -21,7 +27,7 @@ public class Trap : Photon.MonoBehaviour {
 
     void FixedUpdate()
     {
-       
+
     }
 
     private IEnumerator ActivateTrap()
@@ -34,34 +40,64 @@ public class Trap : Photon.MonoBehaviour {
             yield return null;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, bombDistance);
-        laserLine.SetPosition(0, transform.position);
+        List<RaycastHit2D> hits = new List<RaycastHit2D>(new RaycastHit2D[] {
+            Physics2D.Raycast(transform.position, Vector2.up, bombDistance),
+            Physics2D.Raycast(transform.position, Vector2.right, bombDistance),
+            Physics2D.Raycast(transform.position, Vector2.down, bombDistance),
+            Physics2D.Raycast(transform.position, Vector2.left, bombDistance),
+        });
 
-        if (hit.collider != null)
+        List<CustomLineRenderer> laserLines = new List<CustomLineRenderer>
         {
-            StartCoroutine(BoomEffect());
-            laserLine.SetPosition(1, hit.point);
-            string colliderTag = hit.collider.gameObject.tag;
-            if (colliderTag  == "Player")
-            {
-               Inventory inventory =  hit.collider.gameObject.GetComponent<Inventory>();
-               inventory.Kill();
+            new CustomLineRenderer { 
+                Line = transform.Find("lr1").GetComponent<LineRenderer>(),
+                Direction = new Vector2(transform.position.x, transform.position.y + bombDistance)
+            },
+            new CustomLineRenderer {
+                Line = transform.Find("lr2").GetComponent<LineRenderer>(),
+                Direction = new Vector2(transform.position.x + bombDistance, transform.position.y)
+            },
+            new CustomLineRenderer {
+                Line = transform.Find("lr3").GetComponent<LineRenderer>(),
+                Direction = new Vector2(transform.position.x, transform.position.y - bombDistance)
+            },
+            new CustomLineRenderer {
+                Line = transform.Find("lr4").GetComponent<LineRenderer>(),
+                Direction = new Vector2(transform.position.x  - bombDistance, transform.position.y)
             }
-            else if(colliderTag == "money")
-            {
-                PhotonNetwork.Destroy(hit.collider.gameObject);
+        };
 
-            }
-        }
-        else
+
+        for (int i = 0; i < hits.Count; i++)
         {
-            StartCoroutine(BoomEffect());
-            laserLine.SetPosition(1, new Vector2(transform.position.x, transform.position.y - bombDistance));
+            RaycastHit2D hit = hits[i];
+            CustomLineRenderer laserLine = laserLines[i];
+            laserLine.Line.SetPosition(0, transform.position);
 
+            StartCoroutine(BoomEffect(laserLine.Line));
+
+            if (hit.collider != null)
+            {
+                laserLine.Line.SetPosition(1, hit.point);
+                string colliderTag = hit.collider.gameObject.tag;
+                if (colliderTag == "Player")
+                {
+                    Inventory inventory = hit.collider.gameObject.GetComponent<Inventory>();
+                    inventory.Kill();
+                }
+                else if (colliderTag == "money")
+                {
+                    PhotonNetwork.Destroy(hit.collider.gameObject);
+                }
+            }
+            else
+            {
+                laserLine.Line.SetPosition(1, laserLine.Direction);
+            }
         }
     }
 
-    private IEnumerator BoomEffect()
+    private IEnumerator BoomEffect(LineRenderer laserLine)
     {
         laserLine.enabled = true;
 
