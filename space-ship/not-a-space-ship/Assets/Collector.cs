@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Collector : MonoBehaviour {
     Inventory inventory;
-	// Use this for initialization
-	void Start () {
+    LootGenerator lg;
+
+    // Use this for initialization
+    void Start () {
         inventory = GetComponent<Inventory>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        lg = FindObjectOfType<LootGenerator>();
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -23,6 +26,7 @@ public class Collector : MonoBehaviour {
         } else if (target.gameObject.tag == "money")
         {
             Destroy(target.gameObject);
+            lg.currentSpawns--;
             inventory.CollectMoney(10); //TODO get it from other object
         }
     }
