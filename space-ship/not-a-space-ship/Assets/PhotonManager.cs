@@ -30,7 +30,7 @@ public class PhotonManager : Photon.MonoBehaviour {
 
     void HandleOnJoinClick()
     {
-        if (PhotonNetwork.connected)
+        if (PhotonNetwork.connected && PhotonNetwork.inRoom)
         {
             PhotonNetwork.player.NickName = nameInput.text;
 

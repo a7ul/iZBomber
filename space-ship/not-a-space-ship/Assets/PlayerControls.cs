@@ -6,12 +6,14 @@ public class PlayerControls : Photon.MonoBehaviour {
 
     Rigidbody2D rb;
     public float speed;
+    Inventory inventory;
 
-	void Start () {
+    void Start () {
         rb = GetComponent<Rigidbody2D>();
-	}
-	
-	void FixedUpdate() {
+        inventory = GetComponent<Inventory>();
+    }
+
+    void FixedUpdate() {
         // Movement
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
@@ -31,8 +33,9 @@ public class PlayerControls : Photon.MonoBehaviour {
         }
 
         // Actions
-         if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && inventory.money >= 10)
         {
+            inventory.CollectMoney(-10);
             PhotonNetwork.Instantiate("Trap", transform.position, Quaternion.identity, 0); 
         }
     }
