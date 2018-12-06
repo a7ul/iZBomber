@@ -91,4 +91,16 @@ public class PlayerControls : Photon.MonoBehaviour
         MovePlayer();
         AnimatePlayerOnMovement();
     }
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(facingRight);
+        }
+        else
+        {
+            facingRight = (bool)stream.ReceiveNext();
+        }
+    }
 }
