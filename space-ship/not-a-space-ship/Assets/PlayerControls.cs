@@ -9,9 +9,9 @@ public class PlayerControls : Photon.MonoBehaviour
     Inventory inventory;
     Animator anim;
 
-
     Vector2 old_pos;
-    bool facingRight = true;
+
+    bool facingRight = false;
     public float speed = 10f;
 
     void Start()
@@ -54,15 +54,14 @@ public class PlayerControls : Photon.MonoBehaviour
 
     void Flip()
     {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.flipX = facingRight;
         facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
     }
 
     void CheckAndFlip()
     {
-        float axis = Input.GetAxis("Horizontal");
+        float axis =  transform.position.x - old_pos.x;
         if (axis > 0 && !facingRight)
         { Flip(); }
         else if (axis < 0 && facingRight)
@@ -76,14 +75,14 @@ public class PlayerControls : Photon.MonoBehaviour
 
         if (old_pos.Equals(transform.position))
         {
-            anim.Play("Idle");
+            anim.SetTrigger("Stay"); 
         }
         else
         {
             CheckAndFlip();
-            anim.Play("Running");
-
+            anim.SetTrigger("Move");
         }
+        anim.Update(0);
         old_pos = transform.position;
     }
 
