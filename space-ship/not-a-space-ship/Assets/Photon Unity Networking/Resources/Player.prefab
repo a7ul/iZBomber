@@ -91,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1900130714148104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 3.35, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4796190909975032}
@@ -266,18 +266,18 @@ TextMesh:
   m_GameObject: {fileID: 1058890676736490}
   m_Text: Name
   m_OffsetZ: 0
-  m_CharacterSize: 0.3
+  m_CharacterSize: 0.08
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 0
+  m_FontSize: 46
   m_FontStyle: 1
   m_RichText: 1
-  m_Font: {fileID: 0}
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4291067020
 --- !u!114 &114002691927183376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,8 +313,8 @@ MonoBehaviour:
   - {fileID: 114922236292937016}
   - {fileID: 114621681430897988}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 1
+  instantiationId: 1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114621681430897988
