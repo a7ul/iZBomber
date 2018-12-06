@@ -8,6 +8,7 @@ public class LootGenerator : Photon.MonoBehaviour
 
     public GameObject grid;
     public List<GameObject> spawnableObjects;
+    public List<GameObject> spawnablePowerups;
 
     public float minWait;
     public float maxWait;
@@ -19,14 +20,16 @@ public class LootGenerator : Photon.MonoBehaviour
 
     private bool isSpawning;
 
+    System.Random random;
     void Awake()
     {
         isSpawning = false;
+        random = new System.Random();
     }
 
     void Update()
     {
-        if (!isSpawning && PhotonNetwork.connected && PhotonNetwork.isMasterClient)
+        if (!isSpawning && (currentSpawns < maxSpawn) && PhotonNetwork.connected && PhotonNetwork.isMasterClient)
         {
             float timer = Random.Range(minWait, maxWait);
             Invoke("SpawnObject", timer);
@@ -36,27 +39,23 @@ public class LootGenerator : Photon.MonoBehaviour
 
     void SpawnObject()
     {
-        if(currentSpawns < maxSpawn)
-        {
-            System.Random randomNumber = new System.Random();
-            int randomIndex = randomNumber.Next(spawnableObjects.Count);
+        int randomIndex = random.Next(spawnableObjects.Count);
 
-             GameObject spawnedObject = PhotonNetwork.InstantiateSceneObject(
-                spawnableObjects[randomIndex].name,
-                GetRandomGridPosition(),
-                Quaternion.identity,
-                0,
-                nullObj
-             );
-            
-            currentSpawns++;
-            isSpawning = false;
-         
-            StartCoroutine(DeSpawn(spawnedObject));
+        GameObject spawnedObject = PhotonNetwork.InstantiateSceneObject(
+           spawnableObjects[randomIndex].name,
+           GetRandomGridPosition(),
+           Quaternion.identity,
+           0,
+           nullObj
+        );
 
-        }
+        currentSpawns++;
+        isSpawning = false;
+
+        StartCoroutine(DeSpawn(spawnedObject));
+
     }
-    
+
     private IEnumerator DeSpawn(GameObject spawnedObject)
     {
         float normalizedTime = 0;
@@ -65,7 +64,7 @@ public class LootGenerator : Photon.MonoBehaviour
             normalizedTime += Time.deltaTime / spawnDuration;
             yield return null;
         }
-        if(spawnedObject != null)
+        if (spawnedObject != null)
         {
             PhotonNetwork.Destroy(spawnedObject);
             currentSpawns--;

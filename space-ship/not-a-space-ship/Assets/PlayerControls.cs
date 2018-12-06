@@ -6,13 +6,13 @@ public class PlayerControls : Photon.MonoBehaviour
 {
 
     Rigidbody2D rb;
-    public float speed;
     Inventory inventory;
     Animator anim;
 
 
     Vector2 old_pos;
-    bool facingRight = true; 
+    bool facingRight = true;
+    public float speed = 10f;
 
     void Start()
     {
@@ -25,6 +25,7 @@ public class PlayerControls : Photon.MonoBehaviour
 
     void MovePlayer()
     {
+        Debug.Log(speed);
         // Movement
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {

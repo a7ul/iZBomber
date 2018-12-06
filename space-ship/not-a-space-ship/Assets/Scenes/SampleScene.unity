@@ -1196,6 +1196,8 @@ MonoBehaviour:
   grid: {fileID: 1705630477}
   spawnableObjects:
   - {fileID: 1936294592341010, guid: 7702ba9052bd247528f28fd4341a870c, type: 2}
+  spawnablePowerups:
+  - {fileID: 1167352920151874, guid: ab45bf53a0c8146dea21607233da03b1, type: 2}
   minWait: 1
   maxWait: 1
   currentSpawns: 0

@@ -40,4 +40,5 @@ MonoBehaviour:
   - TakeDamage
   - CollectMoney
   - PublishGlobalMessage
+  - ActivatePaypal
   DisableAutoOpenWizard: 1

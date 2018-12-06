@@ -28,6 +28,11 @@ public class Collector : MonoBehaviour {
             Destroy(target.gameObject);
             lg.currentSpawns--;
             inventory.CollectMoney(10); //TODO get it from other object
+        } else if (target.gameObject.tag == "powerup")
+        {
+            Destroy(target.gameObject);
+            lg.currentSpawns--;
+            inventory.ActivatePaypal();
         }
     }
 

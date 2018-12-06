@@ -10,6 +10,8 @@ public class Inventory : Photon.MonoBehaviour {
     public float ecommCount;
 
     private GameController gc;
+    private PlayerControls pc;
+    private readonly float powerupDuration = 7f;
 
     private void SetValues()
     {
@@ -25,6 +27,7 @@ public class Inventory : Photon.MonoBehaviour {
     private void Start()
     {
         gc = FindObjectOfType<GameController>();
+        pc = gameObject.GetComponent<PlayerControls>();
         SetValues();
     }
 
@@ -44,6 +47,23 @@ public class Inventory : Photon.MonoBehaviour {
         SetValues();
     }
 
+    [PunRPC]
+    public void ActivatePaypal()
+    {
+        money += 200;
+        StartCoroutine(TempEffect());
+        SetValues();
+    }
 
-
+    private IEnumerator TempEffect()
+    {
+        pc.speed = 20f;
+        float normalizedTime = 0;
+        while (normalizedTime <= 1f)
+        {
+            normalizedTime += Time.deltaTime / powerupDuration;
+            yield return null;
+        }
+        pc.speed = 7f;
+    }
 }
