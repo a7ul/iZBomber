@@ -25,7 +25,6 @@ public class PlayerControls : Photon.MonoBehaviour
 
     void MovePlayer()
     {
-        Debug.Log(speed);
         // Movement
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
