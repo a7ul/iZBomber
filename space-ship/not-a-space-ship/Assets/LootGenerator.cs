@@ -40,7 +40,7 @@ public class LootGenerator : Photon.MonoBehaviour
     void SpawnObject()
     {
         int randomIndex = random.Next(spawnableObjects.Count);
-        bool shouldSpawnPowerup = random.Next(11) > 8;
+        bool shouldSpawnPowerup = random.Next(11) > 9;
         string gameObjectToSpawn =
         shouldSpawnPowerup
             ? spawnablePowerups[randomIndex].name
