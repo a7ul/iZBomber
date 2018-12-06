@@ -12,7 +12,7 @@ public class PlayerControls : Photon.MonoBehaviour
     Vector2 old_pos;
 
     bool facingRight = false;
-    public float speed = 10f;
+    public float speed;
 
     void Start()
     {
@@ -25,29 +25,15 @@ public class PlayerControls : Photon.MonoBehaviour
 
     void MovePlayer()
     {
-        // Movement
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Translate(-speed * Time.deltaTime, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Translate(speed * Time.deltaTime, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.Translate(Vector2.up * speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(Vector2.down * speed * Time.deltaTime);
-        }
+        float horizontalMovement = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        float verticalMovement = Input.GetAxis("Vertical") * speed * Time.deltaTime;
 
+        transform.Translate(horizontalMovement , verticalMovement , 0);
 
         // Actions
-        if (Input.GetKeyDown(KeyCode.Space) && inventory.money >= 10)
+        if (Input.GetKeyDown(KeyCode.Space) && inventory.money >= 20)
         {
-            inventory.CollectMoney(-10);
+            inventory.CollectMoney(-20);
             PhotonNetwork.Instantiate("Trap", transform.position, Quaternion.identity, 0);
         }
     }

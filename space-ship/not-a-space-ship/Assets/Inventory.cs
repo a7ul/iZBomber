@@ -57,7 +57,7 @@ public class Inventory : Photon.MonoBehaviour {
 
     private IEnumerator TempEffect()
     {
-        pc.speed = 20f;
+        pc.speed = 15f;
         float normalizedTime = 0;
         while (normalizedTime <= 1f)
         {
