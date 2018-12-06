@@ -101,6 +101,8 @@ public class PlayerControls : Photon.MonoBehaviour
         else
         {
             facingRight = (bool)stream.ReceiveNext();
-        }
+            SpriteRenderer sr = GetComponent<SpriteRenderer>();
+            sr.flipX = !facingRight;
+         }
     }
 }
