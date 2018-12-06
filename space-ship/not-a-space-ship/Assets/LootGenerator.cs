@@ -40,9 +40,14 @@ public class LootGenerator : Photon.MonoBehaviour
     void SpawnObject()
     {
         int randomIndex = random.Next(spawnableObjects.Count);
+        bool shouldSpawnPowerup = random.Next(11) > 8;
+        string gameObjectToSpawn =
+        shouldSpawnPowerup
+            ? spawnablePowerups[randomIndex].name
+            : spawnableObjects[randomIndex].name;
 
         GameObject spawnedObject = PhotonNetwork.InstantiateSceneObject(
-           spawnableObjects[randomIndex].name,
+           gameObjectToSpawn,
            GetRandomGridPosition(),
            Quaternion.identity,
            0,
