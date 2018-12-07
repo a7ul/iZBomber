@@ -50,14 +50,14 @@ public class Inventory : Photon.MonoBehaviour {
     [PunRPC]
     public void ActivatePaypal()
     {
-        money += 200;
+        money += 100;
         StartCoroutine(TempEffect());
         SetValues();
     }
 
     private IEnumerator TempEffect()
     {
-        pc.speed = 15f;
+        pc.speed = 14f;
         float normalizedTime = 0;
         while (normalizedTime <= 1f)
         {
