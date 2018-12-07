@@ -2,8 +2,10 @@ A bomber man style game.
 
 **To deploy:**
 
-npm install -g gh-pages
-Build unity.
-inside the web build folder do:
+`npm install -g gh-pages`
 
-gh-pages -d <BuildDirectoryPath>
+Build unity for web and choose Build folder.
+
+then do `cp web-build/* Build/*`
+
+`gh-pages -d Build`
