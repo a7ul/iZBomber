@@ -1,5 +1,8 @@
 A bomber man style game.
 
+Game can be played online at https://kogner.github.io/iZbomber/
+
+
 **To deploy:**
 
 `npm install -g gh-pages`
