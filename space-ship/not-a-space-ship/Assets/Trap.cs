@@ -15,7 +15,7 @@ public class Trap : Photon.MonoBehaviour
     private PhotonView photonView;
     private readonly WaitForSeconds shotDuration = new WaitForSeconds(.07f);
 
-    readonly float trapActivationTime = 1.5f;
+    readonly float trapActivationTime = 1f;
     readonly float bombDistance = 5f;
 
     void Start()
@@ -87,8 +87,8 @@ public class Trap : Photon.MonoBehaviour
                     Inventory inventory = hit.collider.gameObject.GetComponent<Inventory>();
                     if (photonView.isMine)
                     {
-                        var myName = hit.collider.gameObject.GetComponent<PhotonView>().owner.NickName;
-                        gc.PublishGlobalMessage(PhotonNetwork.player.NickName + " eliminated " + myName);
+                        var target = hit.collider.gameObject.GetComponent<PhotonView>().owner.NickName;
+                        gc.UpdateScoreboard(PhotonNetwork.player.NickName, target);
                     }
                     inventory.Kill();
                 }

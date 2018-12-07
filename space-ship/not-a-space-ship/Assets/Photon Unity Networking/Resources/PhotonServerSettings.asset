@@ -42,4 +42,6 @@ MonoBehaviour:
   - PublishGlobalMessage
   - ActivatePaypal
   - CheckAndFlip
+  - ActivateTrap
+  - UpdateScoreboard
   DisableAutoOpenWizard: 1

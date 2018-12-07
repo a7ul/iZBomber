@@ -48,7 +48,7 @@ public class PhotonManager : Photon.MonoBehaviour {
     void OnJoinedLobby () {
         PhotonNetwork.JoinOrCreateRoom(
             "Room",
-            new RoomOptions(){ MaxPlayers = 15 },
+            new RoomOptions(){ MaxPlayers = 20 },
             TypedLobby.Default
         );
     }

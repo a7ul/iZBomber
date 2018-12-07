@@ -51,6 +51,12 @@ public class GameController : MonoBehaviour {
         Debug.Log(msg);
     }
 
+    [PunRPC]
+    public void UpdateScoreboard(string killer, string target)
+    {
+        Debug.Log(killer + " eliminated " + target);
+    }
+
     // Update is called once per frame
     void Update () {
 		

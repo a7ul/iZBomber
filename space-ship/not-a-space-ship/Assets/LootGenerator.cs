@@ -86,7 +86,6 @@ public class LootGenerator : Photon.MonoBehaviour
             Random.Range(cellBounds.yMin + 5, cellBounds.yMax - 1)
         );
 
-
         return pos;
     }
 }
