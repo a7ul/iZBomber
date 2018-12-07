@@ -32,6 +32,12 @@ public class PhotonManager : Photon.MonoBehaviour {
     {
         if (PhotonNetwork.connected && PhotonNetwork.inRoom)
         {
+            if (nameInput.text == "SPECTATE")
+            {
+                gameController.lobbyCanvas.SetActive(false);
+                return;
+            }
+
             PhotonNetwork.player.NickName = nameInput.text;
 
             gameController.SetLobbyActive(false);
