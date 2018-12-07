@@ -6,6 +6,6 @@ A bomber man style game.
 
 Build unity for web and choose Build folder.
 
-then do `cp web-build/* Build/*`
+then do `cp -r web-build/index.html web-build/instructions.png Build`
 
 `gh-pages -d Build`
